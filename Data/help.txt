@@ -1,0 +1,9 @@
+config.json
+
+{"sql_connection":"Server=192.168.1.10\\PROZAX;Database=PXUY3;User ID=sa;Password=utbMitas;TrustServerCertificate=True;"}
+
+
+192.168.1.10\PROZAX
+Database: PXUY3
+salogin: sa / utbMitas
+login: prozax_utb / utbProzax

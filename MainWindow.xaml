@@ -1,0 +1,117 @@
+﻿<Window x:Class="TypPostriku.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TypPostriku"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        MinWidth="800"
+        MinHeight="500"
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition  Height="1*"/>
+            <RowDefinition  Height="30"/>
+        </Grid.RowDefinitions>
+        <TabControl x:Name="TabItemControl">
+            <TabItem Header="Přehled">
+                <Grid Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition  Height="Auto"/>
+                        <RowDefinition  Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300*"/>
+                        <ColumnDefinition Width="600*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label x:Name="lbl_filter" Grid.Row="0" Grid.Column="0" Content="Filtr" FontSize="20"/>
+                    <TextBox x:Name="txt_filter" Grid.Row="0" Grid.Column="1" Margin="0,2,0,2" FontSize="20" TextChanged="txt_filter_TextChanged" />
+
+                    <DataGrid
+                        x:Name="DgListView" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                        HorizontalAlignment="Stretch"
+                        Width="{Binding Path=ActualWidth, ElementName=Form}"
+                        Height="{Binding Path=ActualHeight, ElementName=Form}"
+                        VerticalAlignment="Top"
+                        AutoGenerateColumns="True"
+                        IsReadOnly="True"
+                        MouseDoubleClick="DgListView_MouseDoubleClick"
+                        RowHeight="20"
+                        SelectionMode="Single" />
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="EditTab" Header="Editace">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition  Height="Auto"/>
+                        <RowDefinition  Height="Auto"/>
+                        <RowDefinition  Height="Auto"/>
+                        <RowDefinition  Height="Auto"/>
+                        <RowDefinition  Height="80"/>
+                        <RowDefinition  Height="Auto"/>
+                        <RowDefinition  Height="1*"/>
+                        <RowDefinition  Height="80"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300*"/>
+                        <ColumnDefinition Width="600*"/>
+                        <ColumnDefinition Width="200*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label x:Name="lbl_id" Grid.Row="0" Grid.Column="0" Content="Id" FontSize="20"/>
+                    <TextBox x:Name="txt_id" Grid.Row="0" Grid.Column="1" Margin="0,2,0,2" FontSize="20" IsReadOnly="True" />
+                    <Button x:Name="btn_clean" Grid.Row="0" Grid.Column="2" Content="Nový" FontSize="20" Cursor="Hand" Click="btn_clean_Click"/>
+
+                    <Label x:Name="lbl_mcode" Grid.Row="1" Grid.Column="0" Content="M3 Kód" FontSize="20"/>
+                    <TextBox x:Name="txt_mcode" Grid.Row="1" Grid.Column="1" Margin="0,2,0,2" FontSize="20" TextChanged="txt_mcode_TextChanged" />
+                    
+                    <Label x:Name="lbl_code" Grid.Row="2" Grid.Column="0" Content="Kód" FontSize="20"/>
+                    <TextBox x:Name="txt_code" Grid.Row="2" Grid.Column="1" Margin="0,2,0,2" FontSize="20" TextChanged="txt_mcode_TextChanged"/>
+
+                    <Label x:Name="lbl_name" Grid.Row="3" Grid.Column="0" Content="Název" FontSize="20"/>
+                    <TextBox x:Name="txt_name" Grid.Row="3" Grid.Column="1" Margin="0,2,0,2" FontSize="20" />
+
+                    <Label x:Name="lbl_description" Grid.Row="4" Grid.Column="0" Content="Popisek" FontSize="20"/>
+                    <TextBox x:Name="txt_description" Grid.Row="4" Grid.Column="1" Margin="0,2,0,2" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" FontSize="20" />
+
+                    <Label x:Name="lbl_active" Grid.Row="5" Grid.Column="0" Content="Aktivní" FontSize="20"/>
+                    <CheckBox x:Name="chb_active" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" Cursor="Hand"></CheckBox>
+
+                    <Button Grid.Row="7" Grid.Column="0" x:Name="SaveRec" Content="Uložit" FontSize="20" Cursor="Hand" Click="SaveRec_Click" IsEnabled="False"/>
+                    <Button Grid.Row="7" Grid.Column="2" x:Name="DeleteRec" Content="Smazat" FontSize="20" Cursor="Hand" Click="DeleteRec_Click" IsEnabled="False" />
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="SettingTab" Header="Nastavení">
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition  Height="Auto"/>
+                        <RowDefinition  Height="Auto"/>
+                        <RowDefinition  Height="1*"/>
+                        <RowDefinition  Height="80"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300*"/>
+                        <ColumnDefinition Width="600*"/>
+                        <ColumnDefinition Width="100*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Content="SQL Connection String" FontSize="20"></Label>
+                    <PasswordBox x:Name="SQLconnection" Grid.Row="0" Grid.Column="1" FontSize="20" PasswordChanged="SQLconnection_PasswordChanged"></PasswordBox>
+                    <Button Grid.Row="0" Grid.Column="2" Content="Test" Click="BtnTestConnection_Click" Cursor="Hand"></Button>
+
+                    <TextBox x:Name="txt_log" Grid.Row="2" Grid.Column="1" Margin="0,2,0,2" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" />
+                    <Button Grid.Row="3" Grid.Column="0" x:Name="SaveSetting" Content="Uložit" FontSize="20" Cursor="Hand" Click="SaveSetting_Click"></Button>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <StatusBar x:Name="StatusBar" Height="30" Grid.Row="1">
+            <WrapPanel>
+                <Label x:Name="StatusText" Margin="0,0,0,0" Padding="0" />
+            </WrapPanel>
+        </StatusBar>
+    </Grid>
+    
+</Window>
